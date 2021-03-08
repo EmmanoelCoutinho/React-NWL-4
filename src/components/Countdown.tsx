@@ -1,9 +1,11 @@
 import { clear } from 'console';
-import { useEffect, useState } from 'react';
+import { useContext, useEffect, useState } from 'react';
+import { ChallangesContext } from '../contexts/ChallangesContext';
 
 import styles from '../styles/components/Countdown.module.css'
 
 export function Countdown() {
+  const { newChallange } = useContext(ChallangesContext)
 
   const [time, setTime] = useState(0.1 * 60)
   const [isActive, setIsActive] = useState(false)
@@ -35,6 +37,7 @@ export function Countdown() {
     } else if (isActive && time === 0){
       setHasFinhished(true)
       setIsActive(false)
+      newChallange()
     }
   }, [isActive, time])
 
